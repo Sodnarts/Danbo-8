@@ -4,6 +4,8 @@
     top: 40%;
     transform: translateX(-50%);
     font-size: 42px;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-container {

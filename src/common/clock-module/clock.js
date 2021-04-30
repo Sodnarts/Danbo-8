@@ -113,9 +113,11 @@ class Clock extends React.Component {
     return (
       <>
         <div className="clock">
-          <a href="#" onClick={this.increaseTimer}><ExpandLess style={{display: 'inline-block', marginRight: '8px'}}/></a>
+          <div style={{display: 'flex', flexDirection: "row"}}>
+          <div onClick={this.increaseTimer}><ExpandLess style={{display: 'inline', marginRight: '8px'}}/></div>
           {hours.toString().length > 1 ? hours : "0" + hours}:{minutes.toString().length > 1 ? minutes : "0" + minutes}:{seconds.toString().length > 1 ? seconds : "0" + seconds}
-          <a href="#" onClick={this.decreaseTimer}><ExpandMore style={{display: 'inline-block', marginLeft: '8px'}}/></a>
+          <div onClick={this.decreaseTimer}><ExpandMore style={{display: 'inline', marginLeft: '8px'}}/></div>
+          </div>
         </div>
         <div className="button-container">
           <button className="button" onClick={this.handleCoundown}>{isCountingDown ? 'Stop Countdown' : 'Start Countdown'}</button>
