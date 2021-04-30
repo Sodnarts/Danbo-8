@@ -1,6 +1,7 @@
 import React from 'react';
 import "./clock.css";
 import {ExpandLess, ExpandMore} from '@material-ui/icons';
+import { Music } from 'src/common/song/song-module';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class Clock extends React.Component {
         hours: 0,
       },
       isCountingDown: false,
+      shouldPlay: false,
+      showStopButton: false,
+      volume: 0.2,
     }
   }
 
@@ -45,7 +49,8 @@ class Clock extends React.Component {
   }
 
   callAlarm = () => {
-    console.log("CALLING ALARM")
+    this.setState({shouldPlay: true}, () => this.handleShowStopButton())
+    
   }
 
   increaseTimer = () => {
@@ -66,7 +71,7 @@ class Clock extends React.Component {
   }
 
   decreaseTimer = () => {
-    const { seconds, minutes, hours }= this.state.timer
+    const { seconds, minutes, hours } = this.state.timer
       if (seconds > 0) {
         this.setState({timer: {seconds: seconds - 1, hours: hours, minutes: minutes}})
       } else {
@@ -81,21 +86,42 @@ class Clock extends React.Component {
         }
       }
   }
+
+  handleShowStopButton = () => {
+    const {shouldPlay, volume} = this.state;
+
+    if (shouldPlay) {
+      this.setState({ showStopButton: true})
+      setTimeout(() => {this.setState({showStopButton: false})}, 500);
+      setTimeout(() => {this.setState({volume: volume < 1 ? volume + 0.2 : volume}, () => this.handleShowStopButton())}, 10 * 1000);
+    }
+  }
+
+  stopAlarm = () => {
+    this.setState({
+      shouldPlay: false,
+      volume: 0.2,
+      showStopButton: false,
+    })
+  }
   
   render() {
     const {seconds, minutes, hours} = this.state.timer;
-    const {isCountingDown} = this.state;
+    const {isCountingDown, shouldPlay, showStopButton, volume} = this.state;
 
     return (
-      <div className="container">
-        
+      <>
         <div className="clock">
           <a onClick={this.increaseTimer}><ExpandLess style={{display: 'inline-block', marginRight: '8px'}}/></a>
           {hours.toString().length > 1 ? hours : "0" + hours}:{minutes.toString().length > 1 ? minutes : "0" + minutes}:{seconds.toString().length > 1 ? seconds : "0" + seconds}
           <a onClick={this.decreaseTimer}><ExpandMore style={{display: 'inline-block', marginLeft: '8px'}}/></a>
         </div>
-        <button className="button" onClick={this.handleCoundown}>{isCountingDown ? 'Stop countdown' : 'Start countdown'}</button>
-      </div>
+        <div className="button-container">
+          <button className="button" onClick={this.handleCoundown}>{isCountingDown ? 'Stop Countdown' : 'Start Countdown'}</button>
+          <button style={{visibility: showStopButton ? 'visible' : 'hidden'}} className="button" onClick={this.stopAlarm}>I am awake!</button>
+        </div>
+      <Music shouldPlay={shouldPlay} volume={volume}/>
+      </>
     );
   }
 }
