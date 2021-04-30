@@ -3,33 +3,29 @@ import React, { Component } from 'react'
 class Music extends Component {
   constructor(props) {
   super(props);
-  this.state = {
-    play: false,
-    pause: true,
-  }
-  this.relativePath = "http://streaming.tdiradio.com:8000/house.mp3";
+  
+  this.relativePath = '/El Chombo - Chacarron.mp3';
   this.audio = new Audio(this.relativePath);
 }
 
-play = () => {
-this.setState({ play: true, pause: false })
-  this.audio.play();
+  componentWillReceiveProps(nextProps) {
+    nextProps.shouldPlay ? this.audio.play(): this.audio.pause();
+    this.audio.volume = nextProps.volume;
+
+  }
+
+  play = () => {
+    this.audio.play();
+  }
+
+  pause = () => {
+    this.audio.pause();
+  }
+
+  render ( ) {
+    console.log(this.props.shouldPlay)
+    return (<></>);
+  }
 }
 
-pause = () => {
-this.setState({ play: false, pause: true })
-  this.audio.pause();
-}
-
-render() {
-  
-return (
-  <div>
-    <button onClick={this.play}>Play</button>
-    <button onClick={this.pause}>Pause</button>
-  </div>
-  );
-}
-}
-
-export{ Music };
+export { Music };
