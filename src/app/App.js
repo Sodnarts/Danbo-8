@@ -1,7 +1,8 @@
+import { Clock } from 'src/common/clock-module/clock';
 
 function App() {
   return (
-    <div> REACT HEI</div>
+    <Clock />
   );
 }
 
