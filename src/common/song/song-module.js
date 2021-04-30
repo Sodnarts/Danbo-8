@@ -7,7 +7,7 @@ class Music extends Component {
     play: false,
     pause: true,
   }
-  this.relativePath = "public/El Chombo - Chacarron.mp3";
+  this.relativePath = "http://streaming.tdiradio.com:8000/house.mp3";
   this.audio = new Audio(this.relativePath);
 }
 
