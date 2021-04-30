@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "sodnarts-react"
+  },
+  "targets": {
+    "sodnarts-react": {
+      "hosting": {
+        "danbo": [
+          "danbo-8"
+        ]
+      }
+    }
   }
 }
