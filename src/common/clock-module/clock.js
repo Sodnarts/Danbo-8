@@ -94,6 +94,7 @@ class Clock extends React.Component {
       this.setState({ showStopButton: true})
       setTimeout(() => {this.setState({showStopButton: false})}, 500);
       setTimeout(() => {this.setState({volume: volume < 1 ? volume + 0.2 : volume}, () => this.handleShowStopButton())}, 10 * 1000);
+      
     }
   }
 
