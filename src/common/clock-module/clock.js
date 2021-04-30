@@ -1,5 +1,6 @@
 import React from 'react';
 import "./clock.css";
+import {ExpandLess} from '@material-ui/icons';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -53,6 +54,7 @@ class Clock extends React.Component {
 
     return (
       <div className="container">
+        <ExpandLess></ExpandLess>
         <div className="clock">{hours.toString().length > 1 ? hours : "0" + hours}:{minutes.toString().length > 1 ? minutes : "0" + minutes}:{seconds.toString().length > 1 ? seconds : "0" + seconds}</div>
         <button className="button" onClick={this.handleCoundown}>{isCountingDown ? 'Stop countdown' : 'Start countdown'}</button>
       </div>
