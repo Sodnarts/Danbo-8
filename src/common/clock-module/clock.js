@@ -94,7 +94,7 @@ class Clock extends React.Component {
       this.setState({ showStopButton: true})
       setTimeout(() => {this.setState({showStopButton: false})}, 500);
       setTimeout(() => {this.setState({volume: volume < 1 ? volume + 0.2 : volume}, () => this.handleShowStopButton())}, 10 * 1000);
-      
+
     }
   }
 
@@ -113,9 +113,9 @@ class Clock extends React.Component {
     return (
       <>
         <div className="clock">
-          <a onClick={this.increaseTimer}><ExpandLess style={{display: 'inline-block', marginRight: '8px'}}/></a>
+          <a href="#" onClick={this.increaseTimer}><ExpandLess style={{display: 'inline-block', marginRight: '8px'}}/></a>
           {hours.toString().length > 1 ? hours : "0" + hours}:{minutes.toString().length > 1 ? minutes : "0" + minutes}:{seconds.toString().length > 1 ? seconds : "0" + seconds}
-          <a onClick={this.decreaseTimer}><ExpandMore style={{display: 'inline-block', marginLeft: '8px'}}/></a>
+          <a href="#" onClick={this.decreaseTimer}><ExpandMore style={{display: 'inline-block', marginLeft: '8px'}}/></a>
         </div>
         <div className="button-container">
           <button className="button" onClick={this.handleCoundown}>{isCountingDown ? 'Stop Countdown' : 'Start Countdown'}</button>
